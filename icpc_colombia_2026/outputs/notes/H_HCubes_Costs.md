@@ -87,6 +87,59 @@ int main() {
 }
 ```
 
+### Solución Alternativa Intuitiva: Simulación con Cadenas Binarias
+
+Para competidores que prefieren un razonamiento visual y directo antes de recurrir al álgebra de bits (`^`, `>>`, `&`), es posible materializar explícitamente los vértices `a` y `b` convirtiéndolos en cadenas binarias de longitud `n`.
+
+**Intuición Visual y Alineación de Índices:**
+Al extraer los bits de menor a mayor significancia (`num % 2` y `num /= 2`), el primer caracter de la cadena `s[0]` corresponde exactamente al bit 0 (el menos significativo), cuyo costo de conmutación es `1`. En general, el caracter en el índice `i` (`0 <= i < n`) representa el bit `i`, con costo de conmutación `i + 1`. Por lo tanto, no es necesario invertir la cadena: el índice del arreglo coincide de forma natural con el costo de la arista. Al comparar `s_a[i]` con `s_b[i]`, cada discrepancia suma `i + 1` al costo acumulado.
+
+**Análisis de Complejidad y Trade-Offs:**
+- **Complejidad Temporal:** `O(n)` por caso de prueba. Se realizan `n` divisiones para cada número y un recorrido de longitud `n`, idéntico asintóticamente a la solución con máscaras de bits.
+- **Complejidad Espacial Auxiliar:** `O(n)` para instanciar las cadenas `s_a` y `s_b`. Dado que `n <= 20`, la memoria consumida (20 bytes) es completamente insignificante y se ejecuta holgadamente dentro de los límites de tiempo y memoria del juez.
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// Convierte un número decimal a binario como string de longitud n
+string to_binary_string(long long num, int n) {
+    string s = "";
+    for (int i = 0; i < n; i++) {
+        s += (num % 2 == 0 ? '0' : '1');
+        num /= 2;
+    }
+    // Nota: s[0] representa el bit 0 (el menos significativo)
+    return s;
+}
+
+int main() {
+    int n;
+    long long a, b;
+
+    while (cin >> n >> a >> b && (n != 0 || a != 0 || b != 0)) {
+        string s_a = to_binary_string(a, n);
+        string s_b = to_binary_string(b, n);
+
+        long long cost = 0;
+
+        // Comparamos caracter por caracter
+        for (int i = 0; i < n; i++) {
+            if (s_a[i] != s_b[i]) {
+                cost += (i + 1);
+            }
+        }
+
+        cout << cost << '\n';
+    }
+
+    return 0;
+}
+```
+
 ---
 
 ## 5. Catálogo Preventivo de Antipatrones Cognitivos

@@ -101,6 +101,60 @@ int main() {
 }
 ```
 
+### Solución Alternativa: Ventana Deslizante Explícita (Sliding Window en O(1) Memoria)
+
+En lugar de construir y persistir un arreglo global de sumas de prefijos `pre` de tamaño `N + 1`, podemos concebir el problema directamente bajo la técnica de **Ventana Deslizante** (*Sliding Window*), procesando la cadena en un único recorrido y manteniendo el estado de dos ventanas activas de longitud a lo sumo `M` — una para cada paridad.
+
+**Mecánica de la Ventana Deslizante por Paridad:**
+1. Mantenemos dos acumuladores: `curr_sum[0]` para índices pares (`0, 2, 4, ...`) y `curr_sum[1]` para índices impares (`1, 3, 5, ...`).
+2. Al visitar la posición `i` (`0 <= i < N`), identificamos su paridad `p = i % 2` y añadimos el dígito entrante `s[i] - '0'` a `curr_sum[p]`.
+3. Una ventana contiene a lo sumo `M` dígitos de la misma paridad. Cuando `i >= 2 * m`, la ventana de esa paridad ha sobrepasado los `M` elementos y el término más antiguo de esa misma paridad expira. Dicho elemento se encuentra exactamente en la posición `i - 2 * m`, por lo que simplemente restamos `s[i - 2 * m] - '0'` de `curr_sum[p]`.
+4. En cada paso actualizamos el valor máximo observado: `best = max(best, curr_sum[p])`.
+
+**Análisis de Complejidad y Ventajas:**
+- **Complejidad Temporal:** `O(N)` por caso de prueba. Cada dígito entra y sale de la ventana exactamente una vez con operaciones aritméticas elementales `O(1)`.
+- **Complejidad Espacial Auxiliar:** `O(1)` más allá de la cadena de entrada `s`. No requiere reservar un vector auxiliar `pre` de `10^5` enteros de 64 bits (`long long`), logrando un consumo de memoria mínimo y un uso óptimo de la caché de la CPU.
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n, m;
+    while (cin >> n >> m && (n != 0 || m != 0)) {
+        string s;
+        cin >> s;
+
+        // curr_sum[0] para índices pares (0, 2, 4, ...), curr_sum[1] para impares (1, 3, 5, ...)
+        long long curr_sum[2] = {0, 0};
+        long long best = 0;
+
+        for (int i = 0; i < n; i++) {
+            int p = i % 2;
+            curr_sum[p] += (s[i] - '0');
+
+            // Si la ventana de la paridad actual supera M elementos (i >= 2 * M),
+            // restamos el elemento que expira 2 * M posiciones atrás en la misma paridad.
+            if (i >= 2 * m) {
+                curr_sum[p] -= (s[i - 2 * m] - '0');
+            }
+
+            best = max(best, curr_sum[p]);
+        }
+
+        cout << best << '\n';
+    }
+
+    return 0;
+}
+```
+
 ---
 
 ## 5. Catálogo Preventivo de Antipatrones Cognitivos
