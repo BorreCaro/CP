@@ -84,7 +84,7 @@ Try spotting this shape cold on **Palindrome Partitioning II** or **Perfect Squa
 
 ### ⏳ Next up
 
-- [639 - Decode Ways II](https://leetcode.com/problems/decode-ways/) — the sequel: same gates plus `'*'` wildcards (harder)
+- [639 - Decode Ways II](https://leetcode.com/problems/decode-ways-ii/) — the sequel: same gates plus `'*'` wildcards (harder)
 - [140 - Word Break II](https://leetcode.com/problems/word-break-ii/) — return all segmentations (backtracking)
 - [322 - Coin Change](https://leetcode.com/problems/coin-change/) — ✅ solved 2026-08-01 (9/10, filed under [knapsack-dp](../knapsack-dp/322_Coin_Change.md)) — it was indeed Perfect Squares with coins swapped in
 - [343 - Integer Break](https://leetcode.com/problems/integer-break/) — ✅ solved 2026-08-01 (6/10, [note](343_Integer_Break.md)) — max operator + "leave whole" twist

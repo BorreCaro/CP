@@ -101,7 +101,23 @@ This is where they live.
 - **RPC 2026-09 L - Locate Tobby’s nest** — _Backtrack from B to A without storing parent pointers by simply stepping to any orthogonal neighbor with distance d[u] - 1, and strictly enforce the author's tie-break rule: smaller column first, then smaller row._
 - **RPC 2026-09 M - Marble tilt maze** — _Board stabilization after every single-cell slide means tilts generate multiple cost-1 intermediate states rather than only full-obstacle stops; evaluate concurrent marble motion cell-by-cell prioritizing the forward marble along (r * dr + c * dc) to handle convoy clearances and prune invalid hole or boundary falls immediately._
 
+## 2026-10-10
+
+- **ICPC 2026 A - Balanced System Reactor** — _In an equation with n - 3 ones where a*b*c - (a+b+c) = m, fixing a <= m^(1/3) and b >= a uniquely determines c = (m + a + b) / (a * b - 1), reducing a 3D search to a fast bounded iteration in O(m^(2/3))._
+- **ICPC 2026 B - Bankey** — _Decouple odd and even indices into independent parity prefix sums pre[i] = d[i] + pre[i-2], enabling O(1) evaluation of any length-M step-2 window via pre[i] - pre[i - 2*M]._
+- **ICPC 2026 C - Into the Onion** — _Square the transition threshold condition dist <= 1.5 * d to 4 * dist^2 <= 9 * d^2 to execute convex hull peeling and layer-by-layer DP entirely in exact 64-bit integer arithmetic._
+- **ICPC 2026 D - Bingwhenever** — _Invert the simulation: pre-record each ball's drawn timestamp when[x] in a hash map so each player's finish step is evaluated statically as finish[i] = max_{x in card[i]} when[x] in O(K)._
+- **ICPC 2026 E - Custom Keypad** — _In partition DP over 26 letters, backtrack from right to left scanning cut index s in strictly descending order; the first s achieving the optimal cost dp[j-1][s] + cost[s][p-1] == dp[j][p] guarantees the rightmost separator._
+- **ICPC 2026 F - Heist** — _Partition the room with Sutherland-Hodgman polygon clipping, then find the Chebyshev center of each convex cell via 60 iterations of binary search contracting edges inward by radius r._
+- **ICPC 2026 G - Math United FC** — _When maintaining non-negative budget with on-the-fly choices, tentatively hire every prospect into a max-heap and immediately regret the single most expensive prospect whenever budget drops below zero._
+- **ICPC 2026 H - HCubes Costs** — _Hypercube edge costs c(i) = i + 1 make any redundant flip strictly suboptimal; the shortest path between a and b simply flips each differing bit in a ^ b exactly once with cost sum ((a ^ b >> i) & 1) * (i + 1)._
+- **ICPC 2026 I - Fair Workload Distribution** — _Deconstruct daily round-robin into a uniform base floor(M/N) for all workers and circular remainder intervals, processing queries offline with coordinate compression over queried workers and a Fenwick tree._
+- **ICPC 2026 J - Courage is Contagious** — _Soldier threshold function f(c) = count(k_i <= c) is monotone non-decreasing, so discrete dynamics converge monotonically to the nearest fixed point: up[c_0] if f(c_0) >= c_0, down[c_0] otherwise._
+- **ICPC 2026 K - Sample Median Preservation** — _For an odd sample of size K, having >= h + 1 elements smaller than the median and >= h + 1 larger requires 2h + 2 = K + 1 > K elements, proving the two bad events are strictly mutually exclusive and sum directly by complement._
+- **ICPC 2026 L - Don't Ask Why 2D** — _Break 8 plane symmetries by fixing the first step to R and the first turn to U; because max degree in the contact graph is at most 2, optimal H-subsets for all B <= N can be solved via SOS bitmask DP in < 0.2 s._
+- **ICPC 2026 M - Byte Flu** — _Model minimum device disconnection cost as a minimum vertex-cut problem, splitting normal nodes into (i_in, i_out) with capacity c_i and testing string connectivity with banded Levenshtein DP |i - j| <= K with early pruning._
+
 ---
 
-**Last Updated:** 2026-09-26
+**Last Updated:** 2026-10-10
 
