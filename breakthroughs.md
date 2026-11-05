@@ -117,7 +117,22 @@ This is where they live.
 - **ICPC 2026 L - Don't Ask Why 2D** — _Break 8 plane symmetries by fixing the first step to R and the first turn to U; because max degree in the contact graph is at most 2, optimal H-subsets for all B <= N can be solved via SOS bitmask DP in < 0.2 s._
 - **ICPC 2026 M - Byte Flu** — _Model minimum device disconnection cost as a minimum vertex-cut problem, splitting normal nodes into (i_in, i_out) with capacity c_i and testing string connectivity with banded Levenshtein DP |i - j| <= K with early pruning._
 
+## 2026-11-04
+
+- **RPC 2026-10 A - Accident** — _Fixing two vertices P and Q restricts the moving third vertex R' to just 3 geometric loci for a 90-degree angle: the two perpendicular lines at P and Q and the Thales circle with diameter PQ, solvable in 3 * 3 = 9 distance formulas in O(1)._
+- **RPC 2026-10 B - Birthday** — _Build palindromes from the center outward (L - 2 -> L) via nr = (10 * r + d * (10^(L-1) + 1)) % p so a single DP pass covers all lengths 1 <= L <= k in O(10 * k * p) instead of O(k^2 * p)._
+- **RPC 2026-10 C - Cables** — _Balanced non-zero flow on a contiguous cable block [i, j] is equivalent to linear dependence of net degree vectors d^(q)_v = indeg(v) - outdeg(v) in R^(n-1); an online Gaussian basis storing insertion timestamps pos[c] swaps in newer vectors and finds the largest dependent left endpoint i in O(k * n^2)._
+- **RPC 2026-10 D - Housing** — _Under +1/-1 median encoding, suffix and prefix sums change by +-1 per step and thus span contiguous integer intervals [minL, maxL] and [minR, maxR] by the Discrete Intermediate Value Theorem; sweeping x = 1..n with a point-update Segment Tree checks 0-sum feasibility in O(n log n)._
+- **RPC 2026-10 E - Memories of Passport Control** — _With stamp sizes {1, k}, greedily taking floor(s / k) full batches and s % k single stamps yields the optimal (s / k) + (s % k) in O(1)._
+- **RPC 2026-10 F - Milky way** — _A subarray a[l..r] is non-decreasing iff the prefix sum of adjacent drops (a[i] < a[i-1]) satisfies diff[r] == diff[l]; always size 1-based prefix arrays as n + 1 to avoid out-of-bounds access at diff[n]._
+- **RPC 2026-10 G - Nightmare** — _A 2-colored graph has a simple cycle with exactly one edge of color c iff some edge (u, v) of color c has endpoints already connected in the opposite color's DSU._
+- **RPC 2026-10 H - Park** — _Decompose the tree by centroids so each path splits into two rays (max_b, dist); sorting rays by max_b fixes max(m_i, m_j) = m_j for all i < j and evaluates sum (d_i + d_j) * m_j in O(N log^2 N)._
+- **RPC 2026-10 I - Rope** — _The minimum-perimeter loop enclosing a point set is its convex hull; fixing the lowest vertex p_0, sorting upper points by CCW polar angle, and precomputing triangle point counts inside[i][j] via cross(pts[i], pts[j], pts[k]) > 0 enables an O(n^4) polygon DP._
+- **RPC 2026-10 J - Shopping** — _Bit i can be set in a subset sum iff sum (a_j mod 2^(i+1)) >= 2^i because steps < 2^i cannot jump over [2^i, 2^(i+1) - 1]; track a running bit-count carry from LSB to MSB and set bit i whenever carry > 0._
+- **RPC 2026-10 K - Trains** — _Keep each shifted train interval ordered as [tl, tl + l - 1] with tl = p +- s * t and place the engine '!' at tr when moving right ('R') or tl when moving left ('L')._
+- **RPC 2026-10 L - Vampires** — _Never check half-length strings with integer division len(n) / 2 == len(a) (which truncates odd lengths); always check len(n) == 2 * len(a) alongside product, trailing-zero, and sorted-digit equality._
+
 ---
 
-**Last Updated:** 2026-10-10
+**Last Updated:** 2026-11-04
 
